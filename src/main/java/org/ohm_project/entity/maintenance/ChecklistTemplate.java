@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import org.ohm_project.entity.base.BaseAuditableEntity;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "checklist_templates")
 @SQLDelete(sql = "UPDATE checklist_templates SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLRestriction("deleted_at IS NULL")
 // bìa mẫu danh mục kiểm tra, do admin tạo sẵn
 public class ChecklistTemplate extends BaseAuditableEntity {
 

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import org.ohm_project.entity.base.BaseAuditableEntity;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
                 @UniqueConstraint(name = "uq_part_code_deleted", columnNames = { "part_code", "deleted_at" })
 })
 @SQLDelete(sql = "UPDATE spare_parts SET deleted_at = CURRENT_TIMESTAMP WHERE id = ? AND version = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLRestriction("deleted_at IS NULL")
 public class SparePart extends BaseAuditableEntity {
 
         @NotBlank

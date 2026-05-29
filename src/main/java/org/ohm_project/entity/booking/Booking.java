@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import org.ohm_project.entity.base.BaseAuditableEntity;
 import org.ohm_project.enums.BookingStatus;
 
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "bookings")
 @SQLDelete(sql = "UPDATE bookings SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
+@SQLRestriction("deleted_at IS NULL")
 public class Booking extends BaseAuditableEntity {
 
     @NotNull
